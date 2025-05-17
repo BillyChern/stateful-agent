@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Assistant</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chat-container {
+            height: calc(100vh - 200px);
+        }
+        .message-container {
+            height: calc(100% - 60px);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Panel: Lab Information -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-bold mb-4">Research Labs</h2>
+                <div id="labs-list" class="space-y-4">
+                    <!-- Labs will be populated here -->
+                </div>
+                <button onclick="showCreateLabModal()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Create New Lab
+                </button>
+            </div>
+
+            <!-- Middle Panel: Chat Interface -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow chat-container">
+                    <div class="p-4 border-b">
+                        <h2 class="text-xl font-bold">Chat with Research Assistant</h2>
+                        <p class="text-sm text-gray-600 mt-1">
+                            Ask me to create labs, collect papers, get recommendations, or share on LinkedIn!
+                        </p>
+                    </div>
+                    <div id="chat-messages" class="message-container p-4 space-y-4 overflow-y-auto">
+                        <!-- Messages will appear here -->
+                    </div>
+                    <div class="p-4 border-t">
+                        <div class="flex space-x-2">
+                            <input type="text" id="message-input" 
+                                class="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Type your message...">
+                            <button onclick="sendMessage()" 
+                                class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Papers Section -->
+        <div class="mt-8 bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-bold mb-4">Papers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="papers-list">
+                <!-- Papers will be populated here -->
+            </div>
+        </div>
+
+        <!-- LinkedIn Posts Section -->
+        <div class="mt-8 bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-bold mb-4">Recent LinkedIn Posts</h2>
+            <div class="space-y-4" id="linkedin-posts-list">
+                <!-- LinkedIn posts will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Lab Modal -->
+    <div id="create-lab-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md">
+            <h3 class="text-xl font-bold mb-4">Create New Lab</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Lab Name</label>
+                    <input type="text" id="lab-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Institution</label>
+                    <input type="text" id="lab-institution" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Leader</label>
+                    <input type="text" id="lab-leader" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end space-x-3">
+                <button onclick="hideCreateLabModal()" class="px-4 py-2 border rounded-md hover:bg-gray-50">
+                    Cancel
+                </button>
+                <button onclick="createLab()" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                    Create
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load our JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
