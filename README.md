@@ -26,7 +26,7 @@ A powerful research lab management system that helps you track papers, manage la
 
 ### 1. Set Up Your Environment
 
-First, make sure you have Python 3.11 or higher installed. Then follow these steps:
+First, make sure you have Python 3.11 or higher installed! Then follow these steps:
 
 ```bash
 # After clone the project, create and activate a virtual environment
