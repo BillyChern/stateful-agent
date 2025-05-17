@@ -39,7 +39,7 @@ pip install -r requirements.txt
 
 ### 2. Configure Your Environment
 
-Create a `.env` file in the project root with your settings:
+Create a `.env` file in the project root folder with your settings:
 
 ```env
 # Required: OpenAI API key for AI features
